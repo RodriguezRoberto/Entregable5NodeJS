@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
@@ -19,6 +20,13 @@ app.use(cors());
 
 // Enable incoming JSON data
 app.use(express.json());
+
+// Set pug as template engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+// Enable static assets
+app.use(express.static('public'));
 
 //Add security headers
 app.use(helmet());

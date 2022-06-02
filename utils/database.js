@@ -19,8 +19,7 @@ const db = new Sequelize({
             rejectUnauthorized: false,
           },
         }
-      : {},
-
+      : {}
   });
 
 module.exports = { db };

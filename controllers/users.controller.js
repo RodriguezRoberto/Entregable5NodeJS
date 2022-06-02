@@ -9,6 +9,7 @@ const { Repair } = require('../models/repair.model');
 // Utils
 const { catchAsync } = require('../utils/catchAsync');
 const { AppError } = require('../utils/appError');
+const { Email } = require('../utils/email');
 
 dotenv.config({ path: './config.env' });
 
@@ -33,6 +34,8 @@ const createUser = catchAsync(async ( req, res ) => {
         password: hashPassword, 
         role 
     });
+
+    await new Email( newUser.email ).sendWelcome( newUser.name );
 
     newUser.password = undefined
 
